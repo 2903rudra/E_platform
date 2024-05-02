@@ -1,0 +1,61 @@
+<!-- assignment_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment List</title>
+</head>
+
+<body>
+
+    <h1>Assignment List</h1>
+
+    {% if assignments %}
+    <table>
+        <thead>
+            <tr>
+                <th>Assignment Name</th>
+                <th>Course</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Action</th>
+                <th>Delete</th>
+                <th>Submit Assignment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+            <tr>
+                <td>{{ assignment.title }}</td>
+                <td>{{ assignment.course }}</td>
+                <td>{{ assignment.description }}</td>
+                <td>{{ assignment.due_date }}</td>
+                <td>
+                    <a href="{% url 'edit_assignment' assignment.id %}">Edit</a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_assignment' assignment.id %}">Delete</a>
+                </td>
+                <td>
+                    
+                    <a href="{% url 'submit_assignment' assignment.id %}">Submit Assignment</a>
+                </td>
+                <td>
+                    <a href="{% url 'view_submissions'  %}">View submissions</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'course_list' %}">Add Assignment</a>
+    {% else %}
+    <p>No Assignment available.</p>
+    <a href="{% url 'course_list' %}">Add Assignment</a>
+    {% endif %}
+
+</body>
+
+</html>
